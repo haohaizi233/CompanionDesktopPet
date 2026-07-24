@@ -1195,7 +1195,47 @@ git add src tests
 git commit -m "feat: complete desktop pet interaction and lifecycle"
 ```
 
-### Task 6: Publish, smoke-test, and deliver the EXE
+### Task 6: Add the approved click and drag motion pack
+
+**Files:**
+- Modify: `src/CompanionDesktopPet/UI/AnimationController.cs`
+- Modify: `src/CompanionDesktopPet/MainWindow.xaml`
+- Modify: `src/CompanionDesktopPet/MainWindow.xaml.cs`
+- Modify: `tests/CompanionDesktopPet.Tests/AnimationControllerTests.cs`
+- Modify: `tests/CompanionDesktopPet.Tests/WindowShellTests.cs`
+
+**Interfaces:**
+- Consumes: the existing idle and click transforms, transparent character asset, window drag behavior, and pause state.
+- Produces: rising hearts, velocity-based drag lean, and spring landing recovery. Blink and greeting actions are explicitly omitted.
+
+- [ ] **Step 1: Write failing controller and shell tests**
+
+Assert that landing animates its dedicated transforms, drag lean clamps to eight degrees, and the window exposes a scalable character stage with a non-interactive heart layer.
+
+- [ ] **Step 2: Implement separate action transforms**
+
+Add action scale/rotation/offset transforms after the idle and click transforms. Implement eased landing keyframes and clamped drag lean.
+
+- [ ] **Step 3: Add the scalable heart visual layer**
+
+Wrap the image in a 320-DIP character stage and add three heart glyphs to a non-interactive canvas. Keep the existing context menu on the stage so overlays never steal clicks.
+
+- [ ] **Step 4: Wire click hearts, drag lean, and landing**
+
+Animate hearts on click, update lean from drag movement, and spring back after `DragMove` returns. Do not add blink or greeting actions.
+
+- [ ] **Step 5: Run targeted tests, all tests, and a real GUI motion check**
+
+Verify each action independently and confirm repeated clicks/drags never leave stale opacity, scale, rotation, or translation values.
+
+- [ ] **Step 6: Commit the motion pack**
+
+```powershell
+git add docs src tests
+git commit -m "feat: add heart and drag motions"
+```
+
+### Task 7: Publish, smoke-test, and deliver the EXE
 
 **Files:**
 - Create: `scripts/Verify-Publish.ps1`
